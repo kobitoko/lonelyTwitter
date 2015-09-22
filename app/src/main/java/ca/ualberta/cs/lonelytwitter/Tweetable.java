@@ -1,12 +1,11 @@
 package ca.ualberta.cs.lonelytwitter;
 
-import java.io.IOException;
+import java.util.Date;
 
 /**
- * Created by satyabra on 9/15/15.
+ * Created by joshua2 on 9/16/15.
  */
 public interface Tweetable {
-    public void setText(String text);
     public String getText();
-
+    public Date getDate();
 }
