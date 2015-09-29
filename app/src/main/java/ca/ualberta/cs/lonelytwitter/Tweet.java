@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by joshua2 on 9/16/15.
  */
-public abstract class Tweet extends Object implements Tweetable {
+public abstract class Tweet implements Tweetable, Comparable<Tweet> {
     private String text;
     protected Date date;
 
@@ -45,6 +45,11 @@ public abstract class Tweet extends Object implements Tweetable {
     @Override
     public String toString() {
         return date.toString() + " | " + text;
+    }
+
+    // taken from http://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/
+    public int compareTo(Tweet other) {
+        return this.getDate().compareTo(other.getDate());
     }
 
 }
