@@ -4,7 +4,9 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import junit.framework.TestCase;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by satyabra on 9/29/15.
@@ -32,16 +34,18 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
 
     public void testGetTweets() {
         // getTweets() -- sould return a list of tweets in chronological order
-        // assuming latest first!
         TweetList list = new TweetList();
         Tweet tweet1 = new NormalTweet("aaaa");
         Tweet tweet2 = new NormalTweet("aaaaaaaa");
+        Date date = new Date(12, 11, 24);
+        Tweet tweet3 = new NormalTweet("aa", date);
 
         list.add(tweet1);
         list.add(tweet2);
+        list.add(tweet3);
 
         ArrayList<Tweet> a = list.getTweets();
-        assertSame(a.get(0), tweet2);
+        assertSame(a.get(0), tweet3);
 
     }
 
