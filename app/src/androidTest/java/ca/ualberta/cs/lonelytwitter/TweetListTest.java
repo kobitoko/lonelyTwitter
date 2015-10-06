@@ -88,4 +88,17 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 implements M
         assertTrue(gotNotified);
     }
 
+    public void testModifyTweetInList() {
+        TweetList list = new TweetList();
+        // Needs to add an observer
+        list.addObserver(this);
+        Tweet tweet = new NormalTweet("testing");
+        // We shouldn't have gotten notified here below.
+        list.add(tweet);
+        gotNotified = Boolean.FALSE;
+        tweet.setText("different text");
+        // We should have been notified here below.
+        assertTrue(gotNotified);
+    }
+
 }

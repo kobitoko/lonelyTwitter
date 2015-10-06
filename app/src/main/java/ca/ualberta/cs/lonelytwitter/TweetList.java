@@ -7,7 +7,7 @@ import java.util.Comparator;
 /**
  * Created by satyabra on 9/29/15.
  */
-public class TweetList implements MyObserverable {
+public class TweetList implements MyObserverable, MyObserver {
 
     private Tweet mostRecentTweetThing;
     private ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
@@ -15,6 +15,7 @@ public class TweetList implements MyObserverable {
     public void add(Tweet tweet) {
         mostRecentTweetThing = tweet;
         tweetList.add(tweet);
+        tweet.addObserver(this);
         notifAllObservers();
     }
 
@@ -61,6 +62,11 @@ public class TweetList implements MyObserverable {
         for(MyObserver observer : observers) {
             observer.myNotify(this);
         }
+    }
+
+    // Nested situation here. List will watching all the tweets inside it.
+    public void myNotify(MyObserverable observable) {
+        notifAllObservers();
     }
 
 }

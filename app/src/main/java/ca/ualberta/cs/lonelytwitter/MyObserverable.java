@@ -5,4 +5,6 @@ package ca.ualberta.cs.lonelytwitter;
  */
 public interface MyObserverable {
 
+    public void addObserver(MyObserver observer);
+
 }
