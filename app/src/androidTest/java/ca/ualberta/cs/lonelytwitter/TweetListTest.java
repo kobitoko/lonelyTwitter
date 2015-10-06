@@ -100,5 +100,4 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 implements M
         // We should have been notified here below.
         assertTrue(gotNotified);
     }
-
 }
