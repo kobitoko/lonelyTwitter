@@ -7,7 +7,7 @@ import java.util.Comparator;
 /**
  * Created by satyabra on 9/29/15.
  */
-public class TweetList {
+public class TweetList implements MyObserverable {
 
     private Tweet mostRecentTweetThing;
     private ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
@@ -15,6 +15,7 @@ public class TweetList {
     public void add(Tweet tweet) {
         mostRecentTweetThing = tweet;
         tweetList.add(tweet);
+        notifAllObservers();
     }
 
     public Tweet getMostRecentTweet() {
@@ -46,6 +47,20 @@ public class TweetList {
 
     public void removeTweet(Tweet tweet) {
         tweetList.remove(tweet);
+    }
+
+    // volatile: tells anything that might be serializing this to e.g. disk, or network, wont need to be saved.
+    // Tells that this attribute is not something that needs to be saved, e.g. GSON won't save this then.
+    private volatile ArrayList<MyObserver> observers = new ArrayList<MyObserver>();
+
+    public void addObserver(MyObserver observer) {
+        observers.add(observer);
+    }
+
+    private void notifAllObservers() {
+        for(MyObserver observer : observers) {
+            observer.myNotify(this);
+        }
     }
 
 }

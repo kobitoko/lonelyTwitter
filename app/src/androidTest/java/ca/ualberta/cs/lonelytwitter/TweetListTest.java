@@ -11,7 +11,8 @@ import java.util.Calendar;
 /**
  * Created by satyabra on 9/29/15.
  */
-public class TweetListTest extends ActivityInstrumentationTestCase2 {
+public class TweetListTest extends ActivityInstrumentationTestCase2 implements MyObserver {
+
     public TweetListTest() {
         super(ca.ualberta.cs.lonelytwitter.LonelyTwitterActivity.class);
     }
@@ -64,6 +65,27 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         list.add(tweet);
         list.removeTweet(tweet);
         assertFalse(list.hasTweet(tweet));
+    }
+
+    private Boolean gotNotified;
+
+    // first we need something that we can call, this test IS the observer.
+    // Also java has already a notify, so change name.
+    // It is an extra function that testObservable() uses.
+    public void myNotify(MyObserverable observerable) {
+        gotNotified = Boolean.TRUE;
+    }
+
+    public void testObservable() {
+        TweetList list = new TweetList();
+        // Needs to add an observer
+        list.addObserver(this);
+        Tweet tweet = new NormalTweet("testing");
+        // We shouldn't have gotten notified here below.
+        gotNotified = Boolean.FALSE;
+        list.add(tweet);
+        // We should have been notified here below.
+        assertTrue(gotNotified);
     }
 
 }
