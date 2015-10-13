@@ -4,6 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import junit.framework.TestCase;
 
+import java.lang.reflect.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -100,4 +101,5 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 implements M
         // We should have been notified here below.
         assertTrue(gotNotified);
     }
+
 }
