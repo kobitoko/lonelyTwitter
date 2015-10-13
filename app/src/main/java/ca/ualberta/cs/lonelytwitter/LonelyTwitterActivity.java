@@ -64,7 +64,7 @@ public class LonelyTwitterActivity extends Activity {
 
 		Tweet tweet = new ImportantTweet(""); // Model
 
-		ArrayList<Tweet> tweetList; // Model, but not being used.
+		final ArrayList<Tweet> tweetList; // Model, but not being used.
 
 		bodyText = (EditText) findViewById(R.id.body); // View
 		saveButton = (Button) findViewById(R.id.save); // View
@@ -86,6 +86,7 @@ public class LonelyTwitterActivity extends Activity {
         oldTweetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 				Intent intent = new Intent(activity, EditTweetActivity.class);
+								intent.putExtra("theTextEdited", tweets.get(0).getText());
                 				startActivity(intent);
                 			}
             		});
